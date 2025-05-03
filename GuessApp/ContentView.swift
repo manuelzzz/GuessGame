@@ -8,17 +8,55 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+	var score = 0
+
+	var body: some View {
+		VStack {
+			HStack {
+				Spacer()
+				Text("Score \(score)")
+			}
+			Button(
+				action: {
+					print("dog")
+				},
+				label: {
+					Image("dog")
+						.frame(maxWidth: .infinity)
+						.frame(height: 50)
+						.background(Color.blue)
+						.clipShape(RoundedRectangle(cornerRadius: 6))
+				}
+			)
+			Button(
+				action: {
+					print("cat")
+				},
+				label: {
+					Image("cat")
+						.frame(maxWidth: .infinity)
+						.frame(height: 50)
+						.background(Color.blue)
+						.clipShape(RoundedRectangle(cornerRadius: 6))
+				}
+			)
+			Button(
+				action: {
+					print("fox")
+				},
+				label: {
+					Image("fox")
+						.frame(maxWidth: .infinity)
+						.frame(height: 50)
+						.background(Color.blue)
+						.clipShape(RoundedRectangle(cornerRadius: 6))
+				}
+			)
+		}
+		.padding()
+	}
 }
 
 #Preview {
-    ContentView()
+	ContentView()
 }
