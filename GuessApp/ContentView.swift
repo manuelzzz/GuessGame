@@ -12,7 +12,12 @@ struct ContentView: View {
 
 	var body: some View {
 		VStack {
-			HStack {
+			Group {
+				Text("?")
+					.font(.system(size: 40, weight: .semibold))
+			}
+			.frame(height: 350)
+			VStack {
 				Spacer()
 				Text("Score \(score)")
 			}
@@ -52,6 +57,7 @@ struct ContentView: View {
 						.clipShape(RoundedRectangle(cornerRadius: 6))
 				}
 			)
+			Spacer()
 		}
 		.padding()
 	}
