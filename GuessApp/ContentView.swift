@@ -8,7 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-	var score = 0
+	@State var score = 0
+	var correctAnswer = 0
+
+	func verifyAnswer(_ answer: Int) {
+		if correctAnswer == answer {
+			score += 1
+			return
+		}
+
+		if score == 0 {
+			return
+		}
+
+		score -= 1
+	}
 
 	var body: some View {
 		VStack {
@@ -17,13 +31,13 @@ struct ContentView: View {
 					.font(.system(size: 40, weight: .semibold))
 			}
 			.frame(height: 350)
-			VStack {
+			HStack {
 				Spacer()
 				Text("Score \(score)")
 			}
 			Button(
 				action: {
-					print("dog")
+					verifyAnswer(0)
 				},
 				label: {
 					Image("dog")
@@ -35,7 +49,7 @@ struct ContentView: View {
 			)
 			Button(
 				action: {
-					print("cat")
+					verifyAnswer(1)
 				},
 				label: {
 					Image("cat")
@@ -47,7 +61,7 @@ struct ContentView: View {
 			)
 			Button(
 				action: {
-					print("fox")
+					verifyAnswer(2)
 				},
 				label: {
 					Image("fox")
