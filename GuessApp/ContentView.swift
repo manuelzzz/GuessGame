@@ -9,21 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
 	@State var score = 0
-	@State var correctAnswer = 0
+	var correctAnswer = 0
 
 	func verifyAnswer(_ answer: Int) {
 		if correctAnswer == answer {
 			score += 1
-		} else if score != 0 {
-			score -= 1
+			return
 		}
 
-		randomizeCorrectAnswer()
-	}
+		if score == 0 {
+			return
+		}
 
-	func randomizeCorrectAnswer() {
-		let randomCorrectAnswer = Int.random(in: 0..<3)
-		correctAnswer = randomCorrectAnswer
+		score -= 1
+			return
+		}
+
+		if score == 0 {
+			return
+		}
+
+		score -= 1
 	}
 
 	var body: some View {
@@ -37,41 +43,26 @@ struct ContentView: View {
 				Spacer()
 				Text("Score \(score)")
 			}
-			Button(
+			GameButton(
+				image: "dog",
 				action: {
 					verifyAnswer(0)
 				},
-				label: {
-					Image("dog")
-						.frame(maxWidth: .infinity)
-						.frame(height: 50)
-						.background(Color.blue)
-						.clipShape(RoundedRectangle(cornerRadius: 6))
-				}
+				buttonColor: .indigo
 			)
-			Button(
+			GameButton(
+				image: "cat",
 				action: {
 					verifyAnswer(1)
 				},
-				label: {
-					Image("cat")
-						.frame(maxWidth: .infinity)
-						.frame(height: 50)
-						.background(Color.blue)
-						.clipShape(RoundedRectangle(cornerRadius: 6))
-				}
+				buttonColor: .brown
 			)
-			Button(
+			GameButton(
+				image: "fox",
 				action: {
 					verifyAnswer(2)
 				},
-				label: {
-					Image("fox")
-						.frame(maxWidth: .infinity)
-						.frame(height: 50)
-						.background(Color.blue)
-						.clipShape(RoundedRectangle(cornerRadius: 6))
-				}
+				buttonColor: .cyan
 			)
 			Spacer()
 		}
