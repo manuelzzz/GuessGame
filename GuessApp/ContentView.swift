@@ -9,36 +9,52 @@ import SwiftUI
 
 struct ContentView: View {
 	@State var score = 0
-	var correctAnswer = 0
+	@State var correctAnswer = 0
+	@State var gameTitle = "?"
+	@State var gameSubtitle = ""
+	@State var gameMessageColor = Color.black
 
 	func verifyAnswer(_ answer: Int) {
 		if correctAnswer == answer {
 			score += 1
-			return
+			gameTitle = "Success!"
+			gameMessageColor = .green
+		} else if score != 0 {
+			score -= 1
+			gameTitle = "Failed!"
+			gameMessageColor = .red
 		}
 
-		if score == 0 {
-			return
+		switch correctAnswer {
+		case 0:
+			gameSubtitle = "The correct answer is Dog."
+		case 1:
+			gameSubtitle = "The correct answer is Cat."
+		case 2:
+			gameSubtitle = "The correct answer is Fox."
+		default:
+			gameSubtitle = ""
 		}
 
-		score -= 1
-			return
-		}
+		randomizeCorrectAnswer()
+	}
 
-		if score == 0 {
-			return
-		}
-
-		score -= 1
+	func randomizeCorrectAnswer() {
+		let randomCorrectAnswer = Int.random(in: 0..<3)
+		correctAnswer = randomCorrectAnswer
 	}
 
 	var body: some View {
 		VStack {
-			Group {
-				Text("?")
+			VStack {
+				Text(gameTitle)
 					.font(.system(size: 40, weight: .semibold))
+					.foregroundColor(gameMessageColor)
+				Text(gameSubtitle)
+					.font(.system(size: 20))
 			}
-			.frame(height: 350)
+			.padding(.bottom, 200)
+			.padding(.top, 200)
 			HStack {
 				Spacer()
 				Text("Score \(score)")
