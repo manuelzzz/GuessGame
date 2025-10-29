@@ -9,19 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
 	@State var score = 0
-	var correctAnswer = 0
+	@State var correctAnswer = 0
 
 	func verifyAnswer(_ answer: Int) {
 		if correctAnswer == answer {
 			score += 1
-			return
+		} else if score != 0 {
+			score -= 1
 		}
 
-		if score == 0 {
-			return
-		}
+		randomizeCorrectAnswer()
+	}
 
-		score -= 1
+	func randomizeCorrectAnswer() {
+		let randomCorrectAnswer = Int.random(in: 0..<3)
+		correctAnswer = randomCorrectAnswer
 	}
 
 	var body: some View {
